@@ -1,0 +1,29 @@
+<?php
+
+/**
+* Implements hook_form_alter();
+*/
+function commerce_lang_repair_form_alter(&$form, &$form_state, $form_id) {
+  // Fix order total translation
+  if (isset($form['cart_contents'])){
+    $form['cart_contents']['cart_contents_view']['#markup'] = str_replace('Order total', t('Order total'), $form['cart_contents']['cart_contents_view']['#markup']);
+  }
+  // Fix translation on checkout form
+  if ($form['#id'] == 'commerce-checkout-form-checkout'){
+    if(isset($form['customer_profile_billing'])){
+      $form['customer_profile_billing']['#title'] = t('Billing information');
+    }
+    if (isset($form['customer_profile_shipping'])){
+      $form['customer_profile_shipping']['#title'] = t('Shipping information');
+    }
+  }
+  // Fix translation on checkout review
+  if ($form['#id'] == 'commerce-checkout-form-review'){
+    if (isset($form['checkout_review']['review']['#data']['customer_profile_billing'])){
+      $form['checkout_review']['review']['#data']['customer_profile_billing']['title'] = t('Billing information');
+    }
+    if (isset($form['checkout_review']['review']['#data']['customer_profile_shipping'])){
+      $form['checkout_review']['review']['#data']['customer_profile_shipping']['title'] = t('Shipping information');
+    }
+  }
+}

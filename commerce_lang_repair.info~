@@ -1,4 +1,0 @@
-name = Commerce language repair
-description = This module will repair some translate strings when building non-english. Still its a bit hacky way to do it. You should rather use i18n and i18n_field.
-core = 7.x
-version = 7.1-alfa
